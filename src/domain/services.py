@@ -4,9 +4,6 @@ import re
 from datetime import datetime, timedelta
 from typing import Any
 
-from src.config.settings import settings
-from src.domain.models import Price
-
 
 class PriceService:
     """Service for price-related business logic."""
@@ -32,32 +29,6 @@ class PriceService:
             return float(clean)
         except ValueError:
             return 0.0
-
-    @staticmethod
-    def apply_price_increment(price: float) -> float:
-        """Apply configured price increment percentage.
-
-        Args:
-            price: Original price.
-
-        Returns:
-            Price with increment applied, rounded to integer.
-        """
-        if price <= 0:
-            return 0.0
-        return int(price * settings.price_increment_multiplier)
-
-    @staticmethod
-    def apply_increment_to_price_object(price: Price) -> Price:
-        """Apply increment to a Price object.
-
-        Args:
-            price: Price object to modify.
-
-        Returns:
-            New Price object with increments applied.
-        """
-        return price.apply_increment(settings.price_increment_multiplier)
 
 
 class TextExtractionService:

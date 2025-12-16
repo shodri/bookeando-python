@@ -13,6 +13,7 @@ class Hotel:
     name: str
     url: str
     slug: str | None = None
+    currency: str | None = None
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> "Hotel":
@@ -23,6 +24,7 @@ class Hotel:
             name=data.get("name", ""),
             url=data.get("url", ""),
             slug=slug,
+            currency=data.get("currency"),
         )
 
 
@@ -43,12 +45,6 @@ class Price:
     base_price: float
     final_price: float
     currency: str = "EUR"
-
-    def apply_increment(self, multiplier: float) -> "Price":
-        """Apply price increment multiplier."""
-        new_base = int(self.base_price * multiplier) if self.base_price > 0 else 0.0
-        new_final = int(self.final_price * multiplier) if self.final_price > 0 else 0.0
-        return Price(base_price=new_base, final_price=new_final, currency=self.currency)
 
 
 @dataclass

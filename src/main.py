@@ -171,11 +171,12 @@ def main() -> None:
         "total_errors": [],
     }
 
-    # Process each hotel
+        # Process each hotel
     for hotel_idx, hotel in enumerate(hotels, 1):
         hotel_id = hotel.id
         hotel_name = hotel.name
         hotel_slug = hotel.slug or hotel.url.split("/")[-1].split(".")[0] if hotel.url else ""
+        hotel_currency = hotel.currency or settings.booking_currency
 
         if not hotel.url:
             logger.warning(f"Hotel {hotel_id} has no URL, skipping...")
@@ -209,7 +210,7 @@ def main() -> None:
                     hotel_slug=hotel_slug,
                     checkin=checkin,
                     checkout=checkout,
-                    currency=settings.booking_currency,
+                    currency=hotel_currency,
                     adults=1,
                     children=0,
                 )
@@ -222,7 +223,7 @@ def main() -> None:
                     checkout_date=checkout,
                     adults=1,
                     children=0,
-                    currency=settings.booking_currency,
+                    currency=hotel_currency,
                     extraction_mode="daily",
                     proxy_id=None,
                 )

@@ -306,15 +306,6 @@ class BookingScraper:
                     else:
                         previous_availability = availability
 
-                    # Aplicar incremento del 10.5%
-                    incremento = 1.105
-                    if base_price > 0:
-                        base_price = base_price * incremento
-                        base_price = int(base_price)
-                    if final_price > 0:
-                        final_price = final_price * incremento
-                        final_price = int(final_price)
-
                     # No reembolsable
                     no_reembolsable = 'no reembolsable' in row_html.lower()
 
@@ -1130,6 +1121,7 @@ if __name__ == "__main__":
         hotel_id = hotel['id']
         hotel_name = hotel.get('name', f'Hotel {hotel_id}')
         hotel_slug = hotel.get('url', '')
+        hotel_currency = hotel.get('currency') or settings.booking_currency
 
         if not hotel_slug:
             logger.warning(f"Hotel {hotel_id} no tiene URL, saltando...")
@@ -1190,7 +1182,7 @@ if __name__ == "__main__":
                     'srpvid': srpvid,
                     'type': 'total',
                     'ucfs': '1',
-                    'selected_currency': settings.booking_currency,
+                    'selected_currency': hotel_currency,
                 }
                 
                 # Construir URL con código de país e idioma en el slug
@@ -1206,7 +1198,7 @@ if __name__ == "__main__":
                     'checkout_date': checkout,
                     'adults': 1,
                     'children': 0,
-                    'currency': settings.booking_currency,
+                    'currency': hotel_currency,
                     'extraction_mode': 'daily'
                 }
 

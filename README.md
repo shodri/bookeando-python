@@ -132,7 +132,6 @@ All configuration is managed through environment variables (see `.env.example`):
 - Logging configuration (JSON/text format)
 - Scraping delays and timeouts
 - Chrome/ChromeDriver settings
-- Price increment percentage
 
 ## Testing
 

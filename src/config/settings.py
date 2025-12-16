@@ -38,8 +38,7 @@ class Settings(BaseSettings):
         "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     )
 
-    # Price Configuration
-    price_increment_percentage: float = 10.5
+
 
     # Booking.com URL Configuration
     booking_currency: str = "EUR"  # Default currency for Booking.com URLs
@@ -61,11 +60,6 @@ class Settings(BaseSettings):
             "database": self.db_name,
             "port": self.db_port,
         }
-
-    @property
-    def price_increment_multiplier(self) -> float:
-        """Get price increment as a multiplier (e.g., 1.105 for 10.5%)."""
-        return 1.0 + (self.price_increment_percentage / 100.0)
 
 
 # Global settings instance

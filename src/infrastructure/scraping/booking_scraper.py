@@ -268,15 +268,6 @@ class BookingScraper:
                     else:
                         previous_availability = availability
 
-                    # Aplicar incremento del 10.5%
-                    incremento = settings.price_increment_multiplier
-                    if base_price > 0:
-                        base_price = base_price * incremento
-                        base_price = int(base_price)
-                    if final_price > 0:
-                        final_price = final_price * incremento
-                        final_price = int(final_price)
-
                     # No reembolsable
                     no_reembolsable = "no reembolsable" in row_html.lower()
 

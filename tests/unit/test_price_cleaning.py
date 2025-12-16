@@ -38,19 +38,3 @@ class TestPriceService:
         result = PriceService.clean_price("invalid")
         assert result == 0.0
 
-    def test_apply_price_increment_positive(self) -> None:
-        """Test applying price increment to positive price."""
-        # With 10.5% increment, 100 should become 110.5, rounded to 110
-        result = PriceService.apply_price_increment(100.0)
-        assert result == 110
-
-    def test_apply_price_increment_zero(self) -> None:
-        """Test applying price increment to zero."""
-        result = PriceService.apply_price_increment(0.0)
-        assert result == 0.0
-
-    def test_apply_price_increment_negative(self) -> None:
-        """Test applying price increment to negative price."""
-        result = PriceService.apply_price_increment(-10.0)
-        assert result == 0.0
-
