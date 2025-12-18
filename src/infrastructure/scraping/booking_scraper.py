@@ -15,6 +15,7 @@ from src.domain.exceptions import ScrapingError, ScrapingNetworkError, ScrapingT
 from src.domain.models import RoomAvailability, ScrapedHotelData
 from src.domain.services import PriceService, TextExtractionService
 from src.infrastructure.scraping.driver_factory import DriverFactory
+from src.utils.timezone import now_argentina
 
 logger = logging.getLogger(__name__)
 
@@ -76,7 +77,7 @@ class BookingScraper:
         if currency is None:
             currency = settings.booking_currency
 
-        capture_date = datetime.now()
+        capture_date = now_argentina()
         room_availabilities: list[RoomAvailability] = []
 
         try:
@@ -316,6 +317,15 @@ class BookingScraper:
                         )
 
                         room_availabilities.append(room_availability)
+
+                        # Log detallado de precios encontrados
+                        logger.info(
+                            f"[BookingScraper] 💰 RoomAvailability creado | "
+                            f"Habitación: {room_type} | "
+                            f"Precio Base: {base_price} | "
+                            f"Precio Final: {final_price} | "
+                            f"Fecha: {checkin_date}"
+                        )
 
                         # Log cuando se detecta no reembolsable
                         if no_reembolsable:

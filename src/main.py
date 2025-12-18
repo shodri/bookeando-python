@@ -5,7 +5,9 @@ import logging
 import random
 import subprocess
 import time
-from datetime import datetime, timedelta
+from datetime import timedelta
+
+from src.utils.timezone import now_argentina
 from pathlib import Path
 
 from src.application.update_prices import UpdatePricesService
@@ -136,7 +138,7 @@ def main() -> None:
         proxy = None
 
     # Calculate dates: from today to next configured days
-    today = datetime.now()
+    today = now_argentina()
     dates = []
     for i in range(days_to_extract):
         checkin_date = today + timedelta(days=i)

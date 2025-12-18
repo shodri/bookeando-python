@@ -1,7 +1,6 @@
 """Database repositories for domain entities."""
 
 import json
-from datetime import datetime
 from typing import Any
 
 import mysql.connector
@@ -9,6 +8,7 @@ from mysql.connector import MySQLConnection
 
 from src.domain.exceptions import DatabaseQueryError
 from src.domain.models import Hotel, Room, ScrapeSession
+from src.utils.timezone import now_argentina_str
 
 
 class HotelRepository:
@@ -111,7 +111,7 @@ class RoomRepository:
                 return row[0]
 
             # Create new room type
-            now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            now = now_argentina_str()
             cur.execute(
                 "INSERT INTO room_types (hotel_id, name, description, created_at, updated_at) "
                 "VALUES (%s, %s, %s, %s, %s)",
@@ -313,7 +313,7 @@ class ScrapeSessionRepository:
         """
         cur = self.conn.cursor()
         try:
-            now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            now = now_argentina_str()
             cur.execute(
                 """INSERT INTO room_availabilities
                     (scrape_session_id, room_type_id, room_available_count, offer, base_price,

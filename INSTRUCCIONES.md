@@ -141,7 +141,7 @@ python -c "from src.config.settings import settings; print(settings.db_host)"
 python -m src.main
 
 # Ejecutar con número específico de días
-python -m src.main --days 30
+python -m src.main --days 5
 
 # Ver ayuda
 python -m src.main --help

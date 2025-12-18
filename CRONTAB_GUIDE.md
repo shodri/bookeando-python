@@ -15,7 +15,7 @@ source venv/bin/activate
 poetry shell
 
 # Ejecutar el scraper
-python -m src.main --days 15
+python -m src.main --days 5
 ```
 
 ### Ejecución con Script Shell
@@ -27,7 +27,7 @@ El proyecto incluye `run_booking_scraper.sh` que maneja la limpieza automática:
 chmod +x run_booking_scraper.sh
 
 # Ejecutar
-./run_booking_scraper.sh 15
+./run_booking_scraper.sh 5
 ```
 
 ### Ejecución en Background
